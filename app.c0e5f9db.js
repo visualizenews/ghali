@@ -90238,6 +90238,7 @@ var squares = function squares(data, options) {
     fill: null,
     height: 0,
     id: null,
+    devicePixelRatio: window.devicePixelRatio || 1,
     position: 'centered',
     ratio: 10,
     shape: 'square',
@@ -90250,8 +90251,13 @@ var squares = function squares(data, options) {
   };
 
   var init = function init() {
+    var currentWidth = config.width * config.devicePixelRatio;
+    var currentHeight = config.height * config.devicePixelRatio;
+    var currentSize = config.size * config.devicePixelRatio;
+    var currentDistance = config.distance * config.devicePixelRatio;
+    var currentStrokeWidth = config.strokeWidth * config.devicePixelRatio;
     var container = config.targetObject.append('div').attr('class', 'pointCharts').attr('id', config.id);
-    var cnvs = container.append('canvas').attr('id', "canavs-".concat(config.id)).attr('width', config.width).attr('height', config.height);
+    var cnvs = container.append('canvas').attr('id', "canavs-".concat(config.id)).attr('width', currentWidth).attr('height', currentHeight).attr('style', "width: ".concat(config.width, "px; height: ").concat(config.height, "px"));
     var ctx = cnvs.node().getContext('2d');
     var shapes = Math.round(data / config.ratio);
     var shapesPerLine = Math.round(Math.sqrt(shapes));
@@ -90260,27 +90266,27 @@ var squares = function squares(data, options) {
 
     switch (config.position) {
       case 'centered':
-        offsetX = Math.floor(config.width / 2) - Math.round((config.size + config.distance) * shapesPerLine / 2);
-        offsetY = Math.floor(config.height / 2) - Math.round((config.size + config.distance) * Math.ceil(shapes / shapesPerLine) / 2);
+        offsetX = Math.floor(currentWidth / 2) - Math.round((currentSize + currentDistance) * shapesPerLine / 2);
+        offsetY = Math.floor(currentHeight / 2) - Math.round((currentSize + currentDistance) * Math.ceil(shapes / shapesPerLine) / 2);
         break;
 
       case 'bottom-right':
-        offsetX = config.width - (config.size + config.distance) * shapesPerLine;
-        offsetY = config.height - (config.size + config.distance) * Math.ceil(shapes / shapesPerLine);
+        offsetX = currentWidth - (currentSize + currentDistance) * shapesPerLine;
+        offsetY = currentHeight - (currentSize + currentDistance) * Math.ceil(shapes / shapesPerLine);
         break;
 
       case 'top-right':
-        offsetX = config.width - (config.size + config.distance) * shapesPerLine;
+        offsetX = ccurrentWidth - (currentSize + currentDistance) * shapesPerLine;
         offsetY = 1;
         break;
 
       case 'bottom-left':
         offsetX = 1;
-        offsetY = config.height - (config.size + config.distance) * Math.ceil(shapes / shapesPerLine);
+        offsetY = currentHeight - (currentSize + currentDistance) * Math.ceil(shapes / shapesPerLine);
         break;
 
       case 'top-center':
-        offsetX = Math.floor(config.width / 2) - Math.round((config.size + config.distance) * shapesPerLine / 2);
+        offsetX = Math.floor(currentWidth / 2) - Math.round((currentSize + currentDistance) * shapesPerLine / 2);
         offsetY = 1;
         break;
 
@@ -90292,13 +90298,13 @@ var squares = function squares(data, options) {
 
     ctx.fillStyle = config.fill;
     ctx.strokeStyle = config.stroke;
-    ctx.strokeWidth = config.strokeWidth;
+    ctx.strokeWidth = currentStrokeWidth;
 
     for (var shape = 0; shape < shapes; shape++) {
       if (config.shape === 'circle') {
-        var xPos = offsetX + shape % shapesPerLine * (config.distance + config.size) + Math.floor(config.size / 2);
-        var yPos = offsetY + Math.floor(shape / shapesPerLine) * (config.distance + config.size) + Math.floor(config.size / 2);
-        var radius = config.stroke ? Math.floor(config.size / 2 - config.strokeWidth / 2) : Math.floor(config.size / 2);
+        var xPos = offsetX + shape % shapesPerLine * (currentDistance + currentSize) + Math.floor(currentSize / 2);
+        var yPos = offsetY + Math.floor(shape / shapesPerLine) * (currentDistance + currentSize) + Math.floor(currentSize / 2);
+        var radius = config.stroke ? Math.floor(currentSize / 2 - currentStrokeWidth / 2) : Math.floor(currentSize / 2);
         ctx.beginPath();
         ctx.arc(xPos, yPos, radius, 0, 2 * Math.PI);
 
@@ -90310,16 +90316,16 @@ var squares = function squares(data, options) {
           ctx.stroke();
         }
       } else {
-        var _xPos = offsetX + shape % shapesPerLine * (config.distance + config.size);
+        var _xPos = offsetX + shape % shapesPerLine * (currentDistance + ccurrentSize);
 
-        var _yPos = offsetY + Math.floor(shape / shapesPerLine) * (config.distance + config.size);
+        var _yPos = offsetY + Math.floor(shape / shapesPerLine) * (currentDistance + ccurrentSize);
 
         if (config.fill) {
-          ctx.fillRect(_xPos, _yPos, config.size, config.size);
+          ctx.fillRect(_xPos, _yPos, currentSize, currentSize);
         }
 
         if (config.stroke) {
-          ctx.strokeRect(_xPos + Math.round(config.strokeWidth / 2), _yPos + Math.round(config.strokeWidth / 2), config.size - config.strokeWidth, config.size - config.strokeWidth);
+          ctx.strokeRect(_xPos + Math.round(currentStrokeWidth / 2), _yPos + Math.round(currentStrokeWidth / 2), currentSize - currentStrokeWidth, currentSize - currentStrokeWidth);
         }
       }
     }
@@ -90561,7 +90567,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59171" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51252" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
