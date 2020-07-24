@@ -90503,7 +90503,12 @@ var canvasVocabulary = function canvasVocabulary() {
 
 var _default = canvasVocabulary;
 exports.default = _default;
-},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","d3":"node_modules/d3/index.js","/app/components/utils":"app/components/utils.js","/app/components/squares":"app/components/squares.js","./canvasVocabulary.scss":"app/canvasVocabulary.scss"}],"app/index.scss":[function(require,module,exports) {
+},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","d3":"node_modules/d3/index.js","/app/components/utils":"app/components/utils.js","/app/components/squares":"app/components/squares.js","./canvasVocabulary.scss":"app/canvasVocabulary.scss"}],"app/libraries/cssanimation.min.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"app/index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -90516,6 +90521,8 @@ var _utils = _interopRequireDefault(require("/app/components/utils"));
 var _beeswarmWords = _interopRequireDefault(require("/app/beeswarmWords"));
 
 var _canvasVocabulary = _interopRequireDefault(require("/app/canvasVocabulary"));
+
+require("/app/libraries/cssanimation.min.css");
 
 require("./index.scss");
 
@@ -90532,14 +90539,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   var ready = function ready() {
     if (document.readyState != 'loading') {
       init();
+      scrolly();
     } else {
       document.addEventListener('DOMContentLoaded', init);
     }
   };
 
-  setTimeout(ready, 100);
+  setTimeout(ready, 10);
 })();
-},{"/app/components/utils":"app/components/utils.js","/app/beeswarmWords":"app/beeswarmWords.js","/app/canvasVocabulary":"app/canvasVocabulary.js","./index.scss":"app/index.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"/app/components/utils":"app/components/utils.js","/app/beeswarmWords":"app/beeswarmWords.js","/app/canvasVocabulary":"app/canvasVocabulary.js","/app/libraries/cssanimation.min.css":"app/libraries/cssanimation.min.css","./index.scss":"app/index.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
